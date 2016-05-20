@@ -8,12 +8,12 @@ contract Access{
        ownerDelegate = msg.sender; 
     }
     
-    function authorize(address challenge)returns(bool done){
+    function authorize(address challenge){
         solvedChallenges[challenge] = true;
-        return true;
+        
     }
     
-    function isSolved(address challenge) constant returns(bool){
+    function isSolved(address challenge) constant returns(bool res){
         return solvedChallenges[challenge];
     }
     
