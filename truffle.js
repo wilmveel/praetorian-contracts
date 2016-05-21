@@ -10,7 +10,12 @@ module.exports = {
     "images/": "images/"
   },
   deploy: [
-    
+    "Access",
+    "Challenge",
+    "Grant",
+    "Party",
+    "PasswordChallenge",
+    "TrustedParty"
   ],
   rpc: {
     host: "localhost",

@@ -8,7 +8,7 @@
     abi: [],
     binary: "606060405260068060106000396000f3606060405200",
     unlinked_binary: "606060405260068060106000396000f3606060405200",
-    address: "",
+    address: "0xda48a436052368f7d91432469032d827332be7cb",
     generated_with: "2.0.9",
     contract_name: "TrustedParty"
   };
