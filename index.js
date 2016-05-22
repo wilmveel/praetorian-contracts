@@ -1,10 +1,10 @@
 var contracts = {
-    trustedparty: require('./contracts/TrustedParty.sol'),
     party: require('./contracts/Party.sol'),
     grant: require('./contracts/Grant.sol'),
-    delegate: require('./contracts/Challenge.sol'),
-    passwordDelegate: require('./contracts/PasswordChallenge.sol'),
-    access: require('./contracts/Access.sol')
+    Challenge: require('./contracts/Challenge.sol'),
+    PasswordChallenge: require('./contracts/PasswordChallenge.sol'),
+    access: require('./contracts/Access.sol'),
+    factory: require('./contracts/Factory.sol')
 };
 
 var all = ""

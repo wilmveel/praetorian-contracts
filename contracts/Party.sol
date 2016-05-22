@@ -1,4 +1,4 @@
-contract Party is TrustedParty {
+contract Party {
 
     function Party(){}
     
@@ -8,7 +8,7 @@ contract Party is TrustedParty {
         return challenges;
     }
     
-    function addChallenge(address challenge) isTrusted(){
+    function addChallenge(address challenge) {
         challenges.push(challenge);
     }
 
