@@ -1,9 +1,5 @@
-import "TrustedParty.sol";
-
 contract Party is TrustedParty {
-    
 
-    
     function Party(){}
     
     address[] challenges;

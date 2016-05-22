@@ -1,7 +1,7 @@
 {
-  "name": "contracts",
+  "name": "praetorian-contracts",
   "version": "1.0.0",
-  "description": "solidity contracts",
+  "description": "praetorian contracts",
   "main": "index.js",
   "directories": {
     "test": "test"

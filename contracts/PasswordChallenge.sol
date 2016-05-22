@@ -1,6 +1,3 @@
-import "Challenge.sol";
-import "Access.sol";
-
 contract PasswordChallenge is Challenge{
 
     bytes32 private salt;
@@ -21,16 +18,29 @@ contract PasswordChallenge is Challenge{
         return challenge;
     }
 
-    function getResponse() constant returns(bytes20){
-        return response;
+    function verify(uint8 v, bytes32 r, bytes32 s) {
+        var result =  (bytes20(ecrecover(challenge, v, r, s)) == response);
+        challenge = sha3(challenge);
+        if(result) return success();
+        else return error();
     }
 
-
+    function change(uint8 v, bytes32 r, bytes32 s, bytes20 _response) {
+        var result = (bytes20(ecrecover(challenge, v, r, s)) == response);
+        challenge = sha3(challenge);
+        if(result) {
+            response = _response;
+            return success();
+        }
+        else return error();
+    }
 
     function authorize(uint8 v, bytes32 r, bytes32 s, address access)  {
         var result =  (bytes20(ecrecover(challenge, v, r, s)) == response);
         challenge = sha3(challenge);
         Access(access).authorize(this);
+        if(result) return success();
+        else return error();
     }
 }
 
