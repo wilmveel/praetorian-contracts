@@ -8,7 +8,7 @@
     abi: [{"constant":false,"inputs":[{"name":"v","type":"uint8"},{"name":"r","type":"bytes32"},{"name":"s","type":"bytes32"},{"name":"access","type":"address"}],"name":"authorize","outputs":[],"type":"function"},{"anonymous":false,"inputs":[],"name":"error","type":"event"},{"anonymous":false,"inputs":[],"name":"success","type":"event"}],
     binary: "6060604052601e8060106000396000f3606060405260e060020a6000350463792e1ffc8114601a575b005b601856",
     unlinked_binary: "6060604052601e8060106000396000f3606060405260e060020a6000350463792e1ffc8114601a575b005b601856",
-    address: "",
+    address: "0xb52a3548a095261fc47c99ef0b3f5f10c58e5f76",
     generated_with: "2.0.9",
     contract_name: "Challenge"
   };
