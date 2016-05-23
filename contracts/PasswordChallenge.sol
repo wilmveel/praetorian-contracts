@@ -38,7 +38,7 @@ contract PasswordChallenge is Challenge{
     function authorize(uint8 v, bytes32 r, bytes32 s, address access)  {
         var result =  (bytes20(ecrecover(challenge, v, r, s)) == response);
         challenge = sha3(challenge);
-        Access(access).authorize(this);
+        Access(access).authorize();
         if(result) return success();
         else return error();
     }

@@ -2,19 +2,19 @@ contract Access{
     
     address ownerDelegate;
     
-    mapping(address => bool) solvedChallenges;
+    address[] solvedChallenges;
     
     function Access (){
        ownerDelegate = msg.sender; 
     }
     
-    function authorize(address challenge){
-        solvedChallenges[challenge] = true;
+    function authorize(){
+        solvedChallenges.push(msg.sender);
         
     }
     
-    function isSolved(address challenge) constant returns(bool res){
-        return solvedChallenges[challenge];
+    function isSolved(address challenge) constant returns(address[] sc){
+        return solvedChallenges;
     }
     
 }
