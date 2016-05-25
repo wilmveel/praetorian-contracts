@@ -1,1 +1,1 @@
-module.exports = require('build/contracts.json')
+module.exports = require('./build/contracts.json')
