@@ -23,16 +23,18 @@ contract Factory {
         return challenge;
     }
     
-    function getAccess() constant returns(address access){
-        var wallet = msg.sender;
-        return walletAccess[wallet];
+    function getAccess(address _wallet) constant returns(address access){
+        var wallAddr = walletAccess[_wallet];
+        if(wallAddr == 0){
+            wallAddr = createAccess(_wallet);
+        }
+        return wallAddr;
     }
     
-    function createAccess() returns(address addr){
-        var wallet = msg.sender;
+    function createAccess(address _wallet) returns(address addr){
         var access = new Access();
         created(access);
-        walletAccess[wallet] = access;
+        walletAccess[_wallet] = access;
         return access;
     }
 
