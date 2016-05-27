@@ -29,9 +29,9 @@ contract Factory {
         if(access == 0){
             access = new Access();
             walletAccess[wallet] = address(access);
-            created(access);
+            created(address(access));
         }
-        found(access);
+        found(address(access));
         return access;
     }
 }

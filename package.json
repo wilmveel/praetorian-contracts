@@ -13,5 +13,8 @@
   "license": "MIT",
   "dependencies": {
     "solc": "^0.3.2-1"
+  },
+  "devDependencies": {
+    "json-loader": "^0.5.4"
   }
 }

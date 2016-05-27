@@ -38,7 +38,7 @@ contract PasswordChallenge is Challenge{
         else return error();
     }
 
-    function authorize(uint8 v, bytes32 r, bytes32 s)  {
+    function auth(uint8 v, bytes32 r, bytes32 s)  {
         var result =  (bytes20(ecrecover(challenge, v, r, s)) == response);
         challenge = sha3(challenge);
         if(result) {
