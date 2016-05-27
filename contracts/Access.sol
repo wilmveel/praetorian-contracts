@@ -10,7 +10,6 @@ contract Access{
     
     function authorize(){
         solvedChallenges.push(msg.sender);
-        
     }
     
     function isSolved(address challenge) constant returns(address[] sc){
