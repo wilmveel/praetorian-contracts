@@ -24,11 +24,11 @@ contract Factory {
         return challenge;
     }
     
-    function findAccess() returns(address addr){
-        var access = walletAccess[msg.sender];
+    function findAccess(address wallet) returns(address addr){
+        var access = walletAccess[wallet];
         if(access == 0){
             access = new Access();
-            walletAccess[msg.sender] = address(access);
+            walletAccess[wallet] = address(access);
             created(access);
         }
         found(access);
