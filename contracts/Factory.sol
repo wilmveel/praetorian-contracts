@@ -1,6 +1,7 @@
 contract Factory {
 
     event created(address addr);
+    event found(address addr);
 
     address[] private parties;
     
@@ -23,19 +24,14 @@ contract Factory {
         return challenge;
     }
     
-    function getAccess(address _wallet) constant returns(address addr){
-        var wallAddr = walletAccess[msg.sender];
-        if(wallAddr == 0){
-            wallAddr = createAccess(msg.sender);
+    function findAccess() returns(address addr){
+        var access = walletAccess[msg.sender];
+        if(access == 0){
+            access = new Access();
+            walletAccess[msg.sender] = address(access);
+            created(access);
         }
-        return wallAddr;
-    }
-    
-    function createAccess(address _wallet) returns(address addr){
-        var access = new Access();
-        walletAccess[_wallet] = access;
-        created(access);
+        found(access);
         return access;
     }
-
 }
