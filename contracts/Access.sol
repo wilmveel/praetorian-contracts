@@ -16,7 +16,7 @@ contract Access{
         return success();
     }
     
-    function isSolved(address challenge) constant returns(address[] sc){
+    function isSolved() constant returns(address[] sc){
         return solvedChallenges;
     }
     

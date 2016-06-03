@@ -1,9 +1,10 @@
-contract Grant {
+
+contract Grant is Secure{
 
     address client;
     address owner;
-    
-    string conditions;
+    bool private granted = false;
+    string public conditions = "";
     
     /*
      * No Ether can be transferred to Grant
@@ -12,30 +13,31 @@ contract Grant {
         return;
     }
 
-    function Grant(address _client) {
+    function Grant(address _client, address _owner, address _configuration) Secure(_configuration) {
+        
         client = _client;
+        owner = _owner;
     }
 
     /*
      * authorize the grant contract
      * this can only be done once
      */
-    function authorize() {
-        if(msg.sender != owner) throw;
-        owner = msg.sender;
+    function grantAccess() hasRole('admin1')  {
+        granted = true;
     }
 
     /*
      * revoke the grant contract
      * this can be done by the client or owner
      */
-    function revoke() {
-        if(msg.sender != client ||  msg.sender != owner) throw;
+    function revoke() hasRole('admin1') {
+        
         suicide(msg.sender);
     }
     
-    function getState() constant returns(address client, address owner, string conditions){
-        return (client, owner, conditions);
+    function getState() constant returns(address client, address owner, string conditions, bool granted){
+        return (client, owner, conditions, granted);
     }
 
 }

@@ -1,11 +1,23 @@
-contract Factory {
+contract Factory{
 
     event created(address addr);
     event found(address addr);
 
     address[] private parties;
     
+    address[] private grants;
+    
     mapping(address => address) private walletAccess;
+    
+    address private configuration;
+    
+    address creator;
+    
+    function Factory(bytes32[] _admin1Level, bytes32[] _admin2Level){
+        creator = msg.sender;
+        configuration = new Levels(_admin1Level, _admin2Level);
+        
+    }
 
     function getParties() constant returns (address[]){
         return parties;
@@ -33,5 +45,19 @@ contract Factory {
         }
         found(address(access));
         return access;
+    }
+    
+    function createGrant(address client, address owner) returns(address addr){
+        var grant = new Grant(client, owner, configuration);
+        grants.push(grant);
+        created(address(grant));
+        return grant;
+    }
+    
+    function createLevels(bytes32[] _admin1Level, bytes32[] _admin2Level){
+        if(creator != msg.sender) throw;
+        configuration = new Levels(_admin1Level, _admin2Level);
+        
+        created(address(configuration));
     }
 }

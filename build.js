@@ -6,6 +6,8 @@ require.extensions['.sol'] = function (module, filename) {
 };
 
 var contracts = {
+    levels: require('./contracts/Levels.sol'),
+    secure: require('./contracts/Secure.sol'),
     party: require('./contracts/Party.sol'),
     grant: require('./contracts/Grant.sol'),
     Challenge: require('./contracts/Challenge.sol'),
