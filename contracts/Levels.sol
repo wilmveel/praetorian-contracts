@@ -1,20 +1,30 @@
 contract Levels{
-    mapping(bytes32 => bytes32[]) levelstore;
+
+    bytes32 name;
+    bytes32[]challenges;
     address creator;
     
-    function Levels(bytes32[] _admin1Level, bytes32[] _admin2Level){
+    function Levels(bytes32[] _challenges, bytes32 _name){
         creator = msg.sender;
-        levelstore['admin1'] = _admin1Level;
-        levelstore['admin2'] = _admin2Level;
+        challenges = _challenges;
+        name = _name;
     }
     
     function checkTrust (address candidate, bytes32 level)constant returns(bytes32 role){
         var access = Factory(creator).findAccess(candidate);
-        var solved = Access(access).isSolved();
+        //address[] solved = Access(access).getSolvedChallenges();
+        for (uint challenge = 0 ; challenge < levelstore[level].length -1; challenge++){
+            var solved = Access(access).isSolvedChallenge(challenge);
+            if(solved){
+                throw;
+            }
+        }
         
         
-        return 'admin1';
+        return level;
     }
+    
+    
     
     
     

@@ -4,8 +4,8 @@ contract Secure {
     function Secure(address _configuration){
         configuration = _configuration;
     }
-    modifier hasRole(bytes32 role){
-        var trusted = role == Levels(configuration).checkTrust(msg.sender);
+    modifier hasRole(bytes32 level){
+        var trusted = Levels(configuration).checkTrust(msg.sender, level);
         if(!trusted) return;
     }
     

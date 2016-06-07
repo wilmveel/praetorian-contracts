@@ -1,23 +1,24 @@
 contract Access{
     
-    address ownerDelegate;
+    address creator;
     
-    address[] solvedChallenges;
+    mapping (address => bool)solvedChallenges;
     
     event success();
     event error();
     
     function Access (){
-       ownerDelegate = msg.sender; 
+       creator = msg.sender; 
     }
     
     function authorize(){
-        solvedChallenges.push(msg.sender);
+        Factory(creator).
+        solvedChallenges[msg.sender] = true;
         return success();
     }
     
-    function isSolved() constant returns(address[] sc){
-        return solvedChallenges;
+    function isSolvedChallenge(address challenge) constant returns(bool){
+        return solvedChallenges[challenge];
     }
     
 }

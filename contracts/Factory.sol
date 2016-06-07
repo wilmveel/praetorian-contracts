@@ -13,6 +13,10 @@ contract Factory{
     
     address creator;
     
+    mapping(bytes32 => address) levelstore;
+    
+    mapping(address => bytes32) challenges;
+    
     function Factory(bytes32[] _admin1Level, bytes32[] _admin2Level){
         creator = msg.sender;
         configuration = new Levels(_admin1Level, _admin2Level);
@@ -32,6 +36,7 @@ contract Factory{
 
     function createPasswordChallenge(bytes20 response, bytes32 salt) returns (address addr){
         var challenge = new PasswordChallenge(response, salt);
+        challenges[challenge] = 'password';
         created(challenge);
         return challenge;
     }
@@ -54,10 +59,12 @@ contract Factory{
         return grant;
     }
     
-    function createLevels(bytes32[] _admin1Level, bytes32[] _admin2Level){
+    function createLevels(bytes32[] _challenges, bytes32 name ){
         if(creator != msg.sender) throw;
-        configuration = new Levels(_admin1Level, _admin2Level);
-        
+        configuration = new Levels(_challenges, name);
+        levelstore[name] = configuration;
         created(address(configuration));
     }
+    
+    
 }
