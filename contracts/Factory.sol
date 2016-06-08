@@ -4,11 +4,28 @@ contract Factory {
     event found(address addr);
 
     address[] private parties;
+    address[] private levels;
+    bytes32[] private challenges;
     
     mapping(address => address) private walletAccess;
 
+    function Factory() {
+        challenges = [
+            bytes32('PASSWORD'),
+            bytes32('FACEBOOK')
+        ];
+    }
+
     function getParties() constant returns (address[]){
         return parties;
+    }
+
+    function getChallenges() constant returns (bytes32[]){
+        return challenges;
+    }
+
+    function getLevels() constant returns (address[]){
+        return levels;
     }
 
     function createParty() returns (address addr){
@@ -19,10 +36,23 @@ contract Factory {
     }
 
     function createPasswordChallenge(bytes20 response, bytes32 salt) returns (address addr){
-        var challenge = new PasswordChallenge(response, salt);
+        var challenge = new Challenge('PASSWORD', response, salt);
         created(challenge);
         return challenge;
     }
+
+    function createFacebookChallenge(bytes20 response, bytes32 salt) returns (address addr){
+        var challenge = new Challenge('FACEBOOK', response, salt);
+        created(challenge);
+        return challenge;
+    }
+
+    function createLevel(bytes32 name, bytes32[] challenges) returns (address addr){
+            var level = new Level(name, challenges);
+            levels.push(level);
+            created(level);
+            return level;
+        }
     
     function findAccess(address wallet) returns(address addr){
         var access = walletAccess[wallet];
